@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Feliz Aniversário ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background: linear-gradient(135deg,#f8cdda,#fbc2eb,#fad0c4);
+  background-size:400% 400%;
+  animation: gradient 15s ease infinite;
+  color:#fff;
+  overflow:hidden;
+}
+
+@keyframes gradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.page{
+  position:absolute;
+  width:100%;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  opacity:0;
+  transition:opacity 0.8s ease;
+  pointer-events:none;
+}
+
+.page.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+h1,h2{
+  font-family:'Playfair Display', serif;
+}
+
+button{
+  margin-top:30px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  background:white;
+  color:#e75480;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+.hidden{
+  display:none;
+  margin-top:20px;
+  font-size:20px;
+}
+
+.typing{
+  max-width:700px;
+  font-size:18px;
+  line-height:1.6;
+  min-height:120px;
+}
+
+.cake{
+  font-size:80px;
+  margin-bottom:20px;
+}
+
+.confetti{
+  position:absolute;
+  font-size:25px;
+  animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+  from{transform:translateY(-100px);}
+  to{transform:translateY(100vh);}
+}
+</style>
+</head>
+<body>
+
+<!-- Página 1 -->
+<div class="page active" id="p1">
+  <h1>sabe que dia é hoje?</h1>
+  <button onclick="revelar()">revelar</button>
+  <div id="msg1" class="hidden">é o seu dia minha vidaaaaa 🥰</div>
+  <button onclick="nextPage(2)">continuar</button>
+</div>
+
+<!-- Página 2 -->
+<div class="page" id="p2">
+  <div class="typing" id="text2"></div>
+  <button onclick="nextPage(3)">continuar</button>
+</div>
+
+<!-- Página 3 -->
+<div class="page" id="p3">
+  <div class="typing" id="text3"></div>
+  <button onclick="nextPage(4)">continuar</button>
+</div>
+
+<!-- Página 4 -->
+<div class="page" id="p4">
+  <div class="cake">🎂</div>
+  <button onclick="assoprar()">assopra velas</button>
+  <button onclick="nextPage(5)">continuar</button>
+</div>
+
+<!-- Página 5 -->
+<div class="page" id="p5">
+  <h2>não é um presente caro, mas foi feito com muito amor e carinho 💖</h2>
+  <h1>FELIZ ANIVERSÁRIO MINHA VIDA 🎉</h1>
+  <button onclick="window.location.href='https://youtu.be/LAKWX2ceSzY?si=QuBgfSKLLy_sKwVT'">aperte aqui</button>
+</div>
+
+<script>
+function nextPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+}
+
+function revelar(){
+  document.getElementById('msg1').style.display='block';
+}
+
+function typeEffect(element,text,speed){
+  let i=0;
+  function typing(){
+    if(i<text.length){
+      element.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typing,speed);
+    }
+  }
+  typing();
+}
+
+const texto2 = "Hoje é o dia da garota mais linda desse mundo inteiro 🥺💖 A menina que ilumina meus dias, que deixa tudo mais bonito só com o sorriso dela. Você é especial não só pra mim, mas pra todo mundo que tem o privilégio de te conhecer. Mas pra mim... você é tudo. Você é meu orgulho, minha felicidade, meu pensamento antes de dormir e o primeiro quando eu acordo. Que Deus continue cuidando de você, te protegendo e realizando cada sonho seu. Eu te amo muito, mas muito mesmo, mais do que qualquer palavra pode explicar ❤️";
+
+const texto3 = "Eu queria que você soubesse que você é a pessoa mais importante da minha vida. Seu abraço é meu lugar favorito, seu sorriso é minha paz. Eu amo cada detalhe seu, seu jeito, sua voz, seu carinho. Eu amo estar com você, conversar com você, compartilhar momentos com você. Eu te amo de um jeito que cresce todo dia, que fica mais forte, mais bonito e mais verdadeiro. Obrigado por existir e por ser minha vida 💞";
+
+typeEffect(document.getElementById("text2"),texto2,35);
+typeEffect(document.getElementById("text3"),texto3,35);
+
+function assoprar(){
+  const emojis=["🎊","🎈","🎉"];
+  for(let i=0;i<40;i++){
+    let span=document.createElement("span");
+    span.classList.add("confetti");
+    span.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+    span.style.left=Math.random()*100+"vw";
+    span.style.top=Math.random()>0.5?"-50px":"100vh";
+    document.body.appendChild(span);
+    setTimeout(()=>span.remove(),3000);
+  }
+}
+</script>
+
+</body>
+  </html>
